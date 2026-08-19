@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetFlow — Daily Budget Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+    <header class="topbar">
+        <div>
+            <p class="eyebrow">BUDGETFLOW</p>
+            <h1>Know where your money goes.</h1>
+            <p class="subtitle">Your monthly income, daily allowance, Sunday extras and old debts — all in one place.</p>
+        </div>
+        <div class="header-actions">
+            <button id="todayBtn" class="ghost-btn">Today</button>
+            <button id="resetBtn" class="ghost-btn danger-btn">Reset</button>
+        </div>
+    </header>
+
+    <section class="card setup-card">
+        <div class="section-title">
+            <div>
+                <h2>Monthly setup</h2>
+                <p>Set this once and BudgetFlow handles the math.</p>
+            </div>
+            <span id="monthLabel" class="pill">Current month</span>
+        </div>
+
+        <div class="setup-grid">
+            <div>
+                <label for="month">Month</label>
+                <input id="month" type="month">
+            </div>
+            <div>
+                <label for="income">Monthly income</label>
+                <div class="money-input">
+                    <span>₹</span>
+                    <input id="income" type="number" min="0" step="1" placeholder="10000">
+                </div>
+            </div>
+            <div>
+                <label for="savings">Keep aside / savings</label>
+                <div class="money-input">
+                    <span>₹</span>
+                    <input id="savings" type="number" min="0" step="1" placeholder="1000">
+                </div>
+            </div>
+            <div>
+                <label for="sundayExtra">Extra every Sunday</label>
+                <div class="money-input">
+                    <span>₹</span>
+                    <input id="sundayExtra" type="number" min="0" step="1" placeholder="500">
+                </div>
+            </div>
+        </div>
+
+        <button id="saveSetupBtn" class="primary-btn">Save monthly setup</button>
+    </section>
+
+    <section class="stats-grid">
+        <div class="stat-card">
+            <span>Monthly income</span>
+            <strong id="statIncome">₹0</strong>
+        </div>
+        <div class="stat-card">
+            <span>Normal daily allowance</span>
+            <strong id="statDaily">₹0</strong>
+        </div>
+        <div class="stat-card">
+            <span>Sunday extras</span>
+            <strong id="statSunday">₹0</strong>
+        </div>
+        <div class="stat-card">
+            <span>Money left this month</span>
+            <strong id="statRemaining">₹0</strong>
+        </div>
+    </section>
+
+    <section class="hero card">
+        <div>
+            <p class="muted">TODAY'S USABLE BUDGET</p>
+            <h2 id="usableBudget">₹0</h2>
+            <p id="budgetBreakdown">Set your monthly income to begin.</p>
+        </div>
+        <div id="status" class="status">Set up your month</div>
+    </section>
+
+    <section class="main-grid">
+        <div class="card">
+            <h2>Log today's spending</h2>
+            <p class="muted">The app automatically carries yesterday's debt into today.</p>
+
+            <div class="today-info">
+                <div>
+                    <span>Today's date</span>
+                    <strong id="todayDate">—</strong>
+                </div>
+                <div>
+                    <span>Debt carried in</span>
+                    <strong id="debtIn">₹0</strong>
+                </div>
+                <div>
+                    <span>Sunday extra</span>
+                    <strong id="sundayToday">₹0</strong>
+                </div>
+            </div>
+
+            <label for="spent">How much did you spend today?</label>
+            <div class="money-input big-input">
+                <span>₹</span>
+                <input id="spent" type="number" min="0" step="1" placeholder="180">
+            </div>
+
+            <button id="saveBtn" class="primary-btn">Save today's spending</button>
+        </div>
+
+        <div class="card result-card">
+            <p class="muted">AFTER TODAY'S SPENDING</p>
+            <div id="remaining" class="big-number">₹0</div>
+            <p id="resultText">Enter today's spending to see your result.</p>
+
+            <div class="result-grid">
+                <div>
+                    <span>Tomorrow's normal allowance</span>
+                    <strong id="tomorrowBudget">₹0</strong>
+                </div>
+                <div>
+                    <span>Month spent</span>
+                    <strong id="monthSpent">₹0</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="card history-card">
+        <div class="section-title">
+            <div>
+                <h2>Spending history</h2>
+                <p>Negative days become debt for the next day.</p>
+            </div>
+            <button id="clearHistoryBtn" class="small-btn">Clear month</button>
+        </div>
+        <div id="history"></div>
+    </section>
+
+    <section class="card math-card">
+        <h2>How BudgetFlow calculates it</h2>
+        <div class="formula">
+            <p><b>1.</b> Monthly income − savings = money available for spending.</p>
+            <p><b>2.</b> Normal daily allowance = available money ÷ number of days in the month.</p>
+            <p><b>3.</b> Every Sunday gets your normal allowance <b>+ Sunday extra</b>.</p>
+            <p><b>4.</b> If you overspend, the negative amount becomes tomorrow's debt.</p>
+            <p><b>5.</b> If you underspend, the leftover stays with you; it does not disappear.</p>
+        </div>
+        <div class="example">
+            <b>Example:</b> ₹170 daily allowance − ₹180 spent = −₹10.
+            Tomorrow: ₹170 − ₹10 debt = <b>₹160 usable</b>.
+            If tomorrow is Sunday and Sunday extra is ₹500, it becomes <b>₹660</b>.
+        </div>
+    </section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
